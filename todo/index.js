@@ -19,17 +19,24 @@ const handleDelete = (e) => {
 
 }
 
+const toggle = (element) => {
+    
+    if (element.disabled) {
+        element.disabled = false;
+    } else {
+        element.disabled = true;
+    }
+}
 
 const handleEdit = (e) => {
-    console.dir(e.target);
     let todoChildArray = e.target.parentElement.parentElement.children;
-    console.log(todoChildArray);
 
-    if (todoChildArray[1].disabled) {
-        todoChildArray[1].disabled = false;
-    } else {
-        todoChildArray[1].disabled = true;
-    }
+    // if (todoChildArray[1].disabled) {
+    //     todoChildArray[1].disabled = false;
+    // } else {
+    //     todoChildArray[1].disabled = true;
+    // }
+    toggle(todoChildArray[1])
     
 }
 
@@ -43,12 +50,13 @@ const handleSubmit = (input) => {
     let newTodoElement = document.createElement('div');
     newTodoElement.classList.add("todo");
 
+    // make checkbox
     let todoInput = document.createElement('input');
     todoInput.type = "checkbox";
     todoInput.classList.add('todo-checkbox')
     newTodoElement.appendChild(todoInput)
 
-    // TEXT ELEMENT 
+    // Make TEXT ELEMENT (input) 
     let todoTextElement = document.createElement('input');
     todoTextElement.classList.add("todo-text")
     todoTextElement.value = value;
@@ -56,28 +64,29 @@ const handleSubmit = (input) => {
     newTodoElement.appendChild(todoTextElement);
 
 
-
+    // make buttons container
     let buttonsContainer = document.createElement('div');
     buttonsContainer.classList.add('buttons');
 
+    // make edit button
     let editButton = document.createElement('button');
     editButton.classList.add("edit");
     editButton.addEventListener('click', handleEdit)
     editButton.textContent = "EDIT"
 
+    // make delete button
     let deleteButton = document.createElement('button');
     deleteButton.classList.add("delete");
     deleteButton.addEventListener('click', handleDelete)
     deleteButton.textContent = "DELETE"
 
+    // add buttons to container
     buttonsContainer.appendChild(editButton)
     buttonsContainer.appendChild(deleteButton)
 
     newTodoElement.appendChild(buttonsContainer);
 
 
-
-    console.log(newTodoElement);
 
 
     todoContainer.appendChild(newTodoElement);
