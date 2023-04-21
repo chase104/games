@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script defer src="./index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div id="our-ship-container">
+            <div class="ship">
+                <img src="../assets/USS_Ship.png" alt="our ship">
+                <section class="ship-info">
+                    <div class="text-line">USS SHIP</div>
+                    <div class="text-line">
+                        <div>Health</div>
+                        <div class="health-value">50</div>
+                    </div>
+                    <div class="text-line">
+                        <div>Strength</div>
+                        <div class="health-value">20</div>
+                    </div>
+                    <div class="text-line">
+                        <div>Accuracy</div>
+                        <div class="health-value">.7</div> 
+                        <!-- 70% chance you DO hit the enemy ship. 30% chance you DONT hit -->
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="messages-container">
+            <div class="inner-container">
+                <span id="game-log-text">Game Log</span>
+                <div id="messages">
+                    <p>You lost 4 health!</p>
+                    <p>You did 10 damage!</p>
+                    <p>Ship 2 destroyed!!</p>
+                </div>
+            </div>
+        </div>
+        <div id="enemies-container">
+
+        </div>
+    </div>
+</body>
+</html>
