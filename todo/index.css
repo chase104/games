@@ -2,9 +2,37 @@
 *{
     box-sizing: border-box;
 }
+body {
+    margin: 0px;
+}
 
 #app{
     width: 100vw;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: antiquewhite;
+    padding: 0px 65px;
+}
+.buttons {
+    margin-left: auto;
+    display: flex;
+    height: fit-content;
+}
+#todo-container{
+    margin-top: 28px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
+.todo{
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+.todo-checkbox {
+    transform: scale(2.5);
+}
