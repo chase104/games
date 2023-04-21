@@ -1,4 +1,3 @@
-
 class Ship {
     constructor(health, strength, accuracy){
         this.health = health;
@@ -32,7 +31,7 @@ Borg.addShip(22, 3, .6);
 Borg.addShip(23, 7, .6);
 Borg.addShip(28, 4, .6);
 
-console.log(Borg.ships);
+
 
 
 /*  Borg.ships = [
@@ -93,14 +92,14 @@ const setupGame = () => {
 setupGame()
 
 
-const reset = () => {
-    gameData = {
-        indexOfCurrentShip: 0,
-        gameIsOver: false,
-        ourTurn: true,
-        currentShip: Borg.ships[0]
-    }
-}
+// const reset = () => {
+//     gameData = {
+//         indexOfCurrentShip: 0,
+//         gameIsOver: false,
+//         ourTurn: true,
+//         currentShip: Borg.ships[0]
+//     }
+// }
 
 
 let htmlHealthArray = document.querySelectorAll('#enemies-container .health-value');
@@ -120,7 +119,7 @@ const doOurTurn = () => {
     } else {
         addMessage(`Enemy ship destroyed!`)
         if (gameData.indexOfCurrentShip === Borg.ships.length-1) {
-            prompt('you win!')
+            alert('you win!')
         } else {
             gameData.indexOfCurrentShip++
             // currentShip = Borg.ships[gameData.indexOfCurrentShip+1] INVESTIGATE THIS ISSUE (NOT UPDATING)
@@ -130,7 +129,8 @@ const doOurTurn = () => {
 }
 
 const doEnemyTurn = () => {
-        gameData.currentShip.attack(myShip);
+        console.log(gameData.currentShip);
+        Borg.ships[gameData.indexOfCurrentShip].attack(myShip);
         let myShipHealth = document.querySelector("#our-ship-container .health-value");
         myShipHealth.textContent = myShip.health
         addMessage(`You were hit! Your Health is now ${myShip.health}`)
@@ -144,11 +144,12 @@ const doEnemyTurn = () => {
 }
 
 const next = () => {
-    if (gameData.ourTurn) {
-        doOurTurn()
-    } else {
-        doEnemyTurn()
-    }
+    // if (gameData.ourTurn) {
+    //     doOurTurn()
+    // } else {
+    //     doEnemyTurn()
+    // }
+    gameData.ourTurn ? doOurTurn() : doEnemyTurn()
 }
 
 let nextButton = document.getElementById('next');
@@ -161,32 +162,6 @@ const addMessage = (text) => {
     messagesContainer.innerHTML += `<p>${text}<p>`
 }
 
-const startGame = () => {
-
-    
-    // our ship attacks
-
-    // update enemy ship data
-    // update HTML
-    
-    // put new message
-
-
-
-    // check if enemy ship is alive
-    // IF NO - check if this is the last ship (we win)
-    // not last ship - move to next ship
-    // IF YES 
-    // enemy attacks
-    // update our ship data
-    // check if OUR ship is alive
-    // IF NO - (we lose)
-    // IF YES - attack again
-
-    // put new message
-
-
-}
 
 let playButton = document.getElementById('play')
 
