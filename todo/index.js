@@ -4,6 +4,35 @@ let todoContainer = document.getElementById('todo-container');
 
 
 
+const handleDelete = (e) => {
+    // e.target > button
+    // e.target.parentElement > buttons
+    // e.target.parentElement.parentElement TODO
+
+    let clickedTodo = e.target.parentElement.parentElement;
+
+    let todoContainer = document.getElementById('todo-container');
+
+    todoContainer.removeChild(clickedTodo)
+
+    // document.getElementById('todo-container').removeChild(e.target.parentElement.parentElement)
+
+}
+
+
+const handleEdit = (e) => {
+    console.dir(e.target);
+    let todoChildArray = e.target.parentElement.parentElement.children;
+    console.log(todoChildArray);
+
+    if (todoChildArray[1].disabled) {
+        todoChildArray[1].disabled = false;
+    } else {
+        todoChildArray[1].disabled = true;
+    }
+    
+}
+
 
 const handleSubmit = (input) => {
     let value = input.value;
@@ -19,20 +48,26 @@ const handleSubmit = (input) => {
     todoInput.classList.add('todo-checkbox')
     newTodoElement.appendChild(todoInput)
 
-    let todoTextElement = document.createElement('div');
+    // TEXT ELEMENT 
+    let todoTextElement = document.createElement('input');
     todoTextElement.classList.add("todo-text")
-    todoTextElement.textContent = value;
+    todoTextElement.value = value;
+    todoTextElement.disabled = true
     newTodoElement.appendChild(todoTextElement);
+
+
 
     let buttonsContainer = document.createElement('div');
     buttonsContainer.classList.add('buttons');
 
     let editButton = document.createElement('button');
     editButton.classList.add("edit");
+    editButton.addEventListener('click', handleEdit)
     editButton.textContent = "EDIT"
 
     let deleteButton = document.createElement('button');
     deleteButton.classList.add("delete");
+    deleteButton.addEventListener('click', handleDelete)
     deleteButton.textContent = "DELETE"
 
     buttonsContainer.appendChild(editButton)
@@ -58,3 +93,6 @@ form.addEventListener('submit', (e) => {
         handleSubmit(input);
     }
 });
+
+
+
