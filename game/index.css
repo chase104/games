@@ -11,7 +11,7 @@ body {
     min-height: 100vh;
     display: flex;
     background: antiquewhite;
-    padding: 150px 30px 0px 30px;
+    padding: 150px 50px 0px 50px;
     justify-content: space-between;
 }
 
@@ -31,5 +31,19 @@ body {
     min-height: 350px;
 }
 .inner-container{
+    display: flex;
+    flex-direction: column;
     margin-top: 200px;
+    padding: 40px;
+    padding-top: 12px;
+    background: lightgrey;
+    border-radius: 10px;
+    text-align: center;
+    background: aquamarine;
+}
+#messages{
+    max-height: 200px;
+    overflow: auto;
+    padding: 8px 0px;
+    padding-right: 20px;
 }
