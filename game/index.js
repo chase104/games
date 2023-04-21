@@ -5,6 +5,10 @@ class Ship {
         this.strength = strength;
         this.accuracy = accuracy
     }
+    attack(shipBeingAttacked){
+        // do some attack logic
+        shipBeingAttacked.health -= this.strength
+    }
 }
 class Enemy {
     constructor(name){
@@ -17,7 +21,7 @@ class Enemy {
     }
 }
 
-let myShip = new Ship(50, 15, .7);
+let myShip = new Ship(50, 50, .7);
 
 let Borg = new Enemy('borg');
 
@@ -32,7 +36,7 @@ console.log(Borg.ships);
 
 
 /*  Borg.ships = [
-    {health: 25, strength: 7, accuracy: 0.6},   0
+    {health: 10, strength: 7, accuracy: 0.6},   0
     {health: 25, strength: 7, accuracy: 0.6},   1
     {health: 25, strength: 7, accuracy: 0.6},   2
     {health: 25, strength: 7, accuracy: 0.6},   3
@@ -42,6 +46,12 @@ console.log(Borg.ships);
 */
 
 
+let gameData = {
+    indexOfCurrentShip: 0,
+    gameIsOver: false,
+    ourTurn: true,
+    currentShip: Borg.ships[0]
+}
 
 
 const setupGame = () => {
@@ -83,6 +93,108 @@ const setupGame = () => {
 setupGame()
 
 
-const playGame = () => {
-    
+const reset = () => {
+    gameData = {
+        indexOfCurrentShip: 0,
+        gameIsOver: false,
+        ourTurn: true,
+        currentShip: Borg.ships[0]
+    }
 }
+
+
+let htmlHealthArray = document.querySelectorAll('#enemies-container .health-value');
+console.log(htmlHealthArray);
+
+const doOurTurn = () => {
+    console.log(myShip);
+    console.log(Borg.ships)
+    console.log(gameData);
+    
+    myShip.attack(Borg.ships[gameData.indexOfCurrentShip]);
+    gameData.ourTurn=false
+    htmlHealthArray[gameData.indexOfCurrentShip].textContent = Borg.ships[gameData.indexOfCurrentShip].health
+    
+    if (Borg.ships[gameData.indexOfCurrentShip].health > 0) {
+        addMessage(`Enemy ship health is ${Borg.ships[gameData.indexOfCurrentShip].health}`)
+    } else {
+        addMessage(`Enemy ship destroyed!`)
+        if (gameData.indexOfCurrentShip === Borg.ships.length-1) {
+            prompt('you win!')
+        } else {
+            gameData.indexOfCurrentShip++
+            // currentShip = Borg.ships[gameData.indexOfCurrentShip+1] INVESTIGATE THIS ISSUE (NOT UPDATING)
+            addMessage(`Moving to next ship! Enemy Number ${gameData.indexOfCurrentShip+1}`)
+        }
+    }
+}
+
+const doEnemyTurn = () => {
+        gameData.currentShip.attack(myShip);
+        let myShipHealth = document.querySelector("#our-ship-container .health-value");
+        myShipHealth.textContent = myShip.health
+        addMessage(`You were hit! Your Health is now ${myShip.health}`)
+        // check if my ship is destroyed (we lose)
+        if (myShip.health < 0) {
+            prompt("you lose!")
+        } else {
+            gameData.ourTurn = true;
+        }
+
+}
+
+const next = () => {
+    if (gameData.ourTurn) {
+        doOurTurn()
+    } else {
+        doEnemyTurn()
+    }
+}
+
+let nextButton = document.getElementById('next');
+nextButton.addEventListener('click', next)
+
+
+const addMessage = (text) => {
+    let messagesContainer = document.getElementById('messages');
+
+    messagesContainer.innerHTML += `<p>${text}<p>`
+}
+
+const startGame = () => {
+
+    
+    // our ship attacks
+
+    // update enemy ship data
+    // update HTML
+    
+    // put new message
+
+
+
+    // check if enemy ship is alive
+    // IF NO - check if this is the last ship (we win)
+    // not last ship - move to next ship
+    // IF YES 
+    // enemy attacks
+    // update our ship data
+    // check if OUR ship is alive
+    // IF NO - (we lose)
+    // IF YES - attack again
+
+    // put new message
+
+
+}
+
+let playButton = document.getElementById('play')
+
+playButton.addEventListener('click', (e) => {
+    e.target.disabled = true;
+    let nextButton = document.getElementById('next')
+    nextButton.disabled = false;
+    let resetButton = document.getElementById('reset')
+    resetButton.disabled = false;
+    doOurTurn()
+})
