@@ -3,6 +3,13 @@ let form = document.getElementById("input-container");
 let todoContainer = document.getElementById('todo-container');
 
 
+// let todos = [
+//     {
+//     done: false,
+//     content: "code 3 hours"
+//     }
+// ]
+
 
 const handleDelete = (e) => {
     // e.target > button
@@ -105,3 +112,6 @@ form.addEventListener('submit', (e) => {
 
 
 
+
+
+// is the second todo done?

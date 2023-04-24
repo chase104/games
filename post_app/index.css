@@ -1,0 +1,39 @@
+
+*{
+    box-sizing: border-box;
+}
+body {
+    margin: 0px;
+}
+
+#app{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    flex-direction: column;
+    gap: 20px;
+}
+#login-form{
+    background-color: aqua;
+    padding: 30px;
+}
+
+.user-info{
+    display: none
+}
+
+#new-post{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    display: none;
+}
+.post{
+    max-width: 50vw;
+    max-width: 50vw;
+    border: 1px solid black;
+    padding: 20px;
+}
